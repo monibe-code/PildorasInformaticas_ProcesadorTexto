@@ -25,6 +25,8 @@ class MarcoProcesador extends JFrame{
 
 class LaminaProcesador extends JPanel{
 	public LaminaProcesador() {
+
+		
 		setLayout(new BorderLayout());
 		JPanel laminamenu= new JPanel();
 		JMenuBar barra= new JMenuBar();
@@ -35,18 +37,14 @@ class LaminaProcesador extends JPanel{
 		tamagno= new JMenu("Tamaño");
 		//--------------------------------------------------------
 		//Creación de los elementos del menú
-		configura_menu("Arial", "fuente", "Arial", 9, 10);
-		configura_menu("Courier", "fuente", "Courier", 9, 10);
-		configura_menu("Verdana", "fuente", "Verdana", 9, 10);
+		configura_menu("Arial", "fuente", "Arial", 9, 10,"");
+		configura_menu("Courier", "fuente", "Courier", 9, 10,"");
+		configura_menu("Verdana", "fuente", "Verdana", 9, 10,"");
 		
 		//--------------------------------------------------------
-		//creación JCheckboxMenuItem para los estilos
-		JCheckBoxMenuItem negrita= new JCheckBoxMenuItem("Negrita", new ImageIcon("src/procesador3/imagenes/negrita.gif"));
-		JCheckBoxMenuItem cursiva= new JCheckBoxMenuItem("Cursiva", new ImageIcon("src/procesador3/imagenes/cursiva.gif"));
-		negrita.addActionListener(new StyledEditorKit.BoldAction() );
-		cursiva.addActionListener(new StyledEditorKit.ItalicAction());
-		estilo.add(negrita);
-		estilo.add(cursiva);
+		//creación JMenuItem con método configura_menu
+		configura_menu("Negrita", "estilo", "", Font.BOLD,1,"src/Procesador3/imagenes/negrita.gif");
+		configura_menu("Cursiva", "estilo", "", Font.ITALIC,1,"src/Procesador3/imagenes/cursiva.gif");
 		//----------------------------------------------------------
 		//creación de JRadioButtonMenuItem para los tamaños
 		ButtonGroup migrupo= new ButtonGroup();
@@ -78,12 +76,20 @@ class LaminaProcesador extends JPanel{
 		miarea=new JTextPane();
 		add(miarea, BorderLayout.CENTER);
 		
-		
-		
+		//----------------------------------------------------------
+		JPopupMenu emergente= new JPopupMenu();
+		JMenuItem negritaE= new JMenuItem("Negrita");
+		JMenuItem cursivaE= new JMenuItem("Cursiva");
+		negritaE.addActionListener(new StyledEditorKit.BoldAction() );
+		cursivaE.addActionListener(new StyledEditorKit.ItalicAction());
+		emergente.add(negritaE);
+		emergente.add(cursivaE);
+		//ahora debemos especificar dónde va a hacer efecto (en el JTextPane)
+		miarea.setComponentPopupMenu(emergente);
 	}
 	
-	public void configura_menu(String rotulo, String menu, String tipo_letra, int estilos, int tam) {
-		JMenuItem elem_menu= new JMenuItem(rotulo);
+	public void configura_menu(String rotulo, String menu, String tipo_letra, int estilos, int tam,String ruta_icono ) {
+		JMenuItem elem_menu= new JMenuItem(rotulo, new ImageIcon(ruta_icono));
 		if(menu=="fuente") {
 			fuente.add(elem_menu);
 			if(tipo_letra=="Arial") {
@@ -96,6 +102,13 @@ class LaminaProcesador extends JPanel{
 
 			}
 
+		}else if(menu=="estilo") {
+			estilo.add(elem_menu);
+			if(estilos==Font.BOLD) {
+				elem_menu.addActionListener(new StyledEditorKit.BoldAction());
+			}else if(estilos==Font.ITALIC) {
+				elem_menu.addActionListener(new StyledEditorKit.ItalicAction());
+			}
 		}
 		
 	}
