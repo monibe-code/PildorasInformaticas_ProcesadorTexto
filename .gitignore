@@ -1,0 +1,44 @@
+# Archivos de compilación
+/bin/
+/build/
+/out/
+
+# Archivos generados por Maven o Gradle
+/target/
+/*.class
+*.jar
+*.war
+*.ear
+
+# Archivos de configuración del IDE
+# Eclipse
+*.classpath
+*.project
+*.settings/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs y temporales
+*.log
+*.tmp
+
+# Archivos de configuración personal
+*.swp
+*.bak
+*.orig
