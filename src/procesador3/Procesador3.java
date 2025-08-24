@@ -40,8 +40,8 @@ class LaminaProcesador extends JPanel{
 		configura_menu("Verdana", "fuente", "Verdana", 9, 10,"");
 		
 		//--------------------------------------------------------
-		configura_menu("Negrita", "estilo", "", Font.BOLD, 1,"bin/procesador3/negrita.gif");
-		configura_menu("Cursiva", "estilo", "", Font.ITALIC, 1, "bin/procesador3/cursiva.gif");
+//		configura_menu("Negrita", "estilo", "", Font.BOLD, 1,"src/procesador3/imagenes/negrita.gif");
+//		configura_menu("Cursiva", "estilo", "", Font.ITALIC, 1, "src/procesador3/imagenes/cursiva.gif");
 		//----------------------------------------------------------
 		configura_menu("12", "tamaño", "", 9, 12, "");
 		configura_menu("16", "tamaño", "", 9, 16,"");
