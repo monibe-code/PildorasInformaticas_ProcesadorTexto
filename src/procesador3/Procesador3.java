@@ -42,6 +42,13 @@ class LaminaProcesador extends JPanel{
 		//--------------------------------------------------------
 //		configura_menu("Negrita", "estilo", "", Font.BOLD, 1,"src/procesador3/imagenes/negrita.gif");
 //		configura_menu("Cursiva", "estilo", "", Font.ITALIC, 1, "src/procesador3/imagenes/cursiva.gif");
+		//creación JCheckboxMenuItem
+		JCheckBoxMenuItem negrita= new JCheckBoxMenuItem("Negrita", new ImageIcon("src/procesador3/imagenes/negrita.gif"));
+		JCheckBoxMenuItem cursiva= new JCheckBoxMenuItem("Cursiva", new ImageIcon("src/procesador3/imagenes/cursiva.gif"));
+		negrita.addActionListener(new StyledEditorKit.BoldAction() );
+		cursiva.addActionListener(new StyledEditorKit.ItalicAction());
+		estilo.add(negrita);
+		estilo.add(cursiva);
 		//----------------------------------------------------------
 		configura_menu("12", "tamaño", "", 9, 12, "");
 		configura_menu("16", "tamaño", "", 9, 16,"");
@@ -76,13 +83,13 @@ class LaminaProcesador extends JPanel{
 				elem_menu.addActionListener(new StyledEditorKit.FontFamilyAction("cambiaLetra", "Verdana"));
 
 			}
-		}else if(menu=="estilo") {
-			estilo.add(elem_menu);
-			if(estilos==Font.BOLD) {
-			elem_menu.addActionListener(new StyledEditorKit.BoldAction() );
-			}else if(estilos==Font.ITALIC) {
-				elem_menu.addActionListener(new StyledEditorKit.ItalicAction());
-			}
+//		}else if(menu=="estilo") {
+//			estilo.add(elem_menu);
+//			if(estilos==Font.BOLD) {
+//			elem_menu.addActionListener(new StyledEditorKit.BoldAction() );
+//			}else if(estilos==Font.ITALIC) {
+//				elem_menu.addActionListener(new StyledEditorKit.ItalicAction());
+//			}
 		}else if(menu=="tamaño") {
 			tamagno.add(elem_menu);
 			elem_menu.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", tam));
