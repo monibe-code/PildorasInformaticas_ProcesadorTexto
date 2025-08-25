@@ -1,8 +1,11 @@
 package procesador3;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 
 public class Procesador3 {
@@ -17,7 +20,7 @@ public class Procesador3 {
 
 class MarcoProcesador extends JFrame{
 	public MarcoProcesador() {
-		setBounds(500,300,550,400);
+		setBounds(500,300,550,550);
 		add(new LaminaProcesador());
 		setVisible(true);
 	}
@@ -56,6 +59,8 @@ class LaminaProcesador extends JPanel{
 		tam16.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 16));
 		tam18.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 18));
 		tam20.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 20));
+//		//atajo de teclado para tam20
+//		tam20.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
 		migrupo.add(tam12);
 		migrupo.add(tam16);
 		migrupo.add(tam18);
@@ -86,7 +91,46 @@ class LaminaProcesador extends JPanel{
 		emergente.add(cursivaE);
 		//ahora debemos especificar dónde va a hacer efecto (en el JTextPane)
 		miarea.setComponentPopupMenu(emergente);
-	}
+		//--------------------------------------------------------
+		//Creación barra herramientas a la izquierda
+		JToolBar barraHerramientas= new JToolBar();
+		JButton negritaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/negrita.gif"));
+		JButton cursivaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/cursiva.gif"));
+		JButton subraBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/subrayado.gif"));
+		JButton azulBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaAzul.gif"));
+		JButton amarilloBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaAmarilla.gif"));
+		JButton rojoBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaRoja.gif"));
+		JButton derechaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/derecha.gif"));
+		JButton centradoBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/centrado.gif"));
+		JButton izquierdaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/izquierda.gif"));
+
+		
+		//---------------------------------------------------------
+		negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
+		cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
+		subraBarra.addActionListener(new StyledEditorKit.UnderlineAction());
+		azulBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.BLUE));
+		amarilloBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.YELLOW));
+		rojoBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.RED));
+		derechaBarra.addActionListener(new StyledEditorKit.AlignmentAction("Derecha", 0));
+		centradoBarra.addActionListener(new StyledEditorKit.AlignmentAction("Centrado",1));
+		izquierdaBarra.addActionListener(new StyledEditorKit.AlignmentAction("Izquierda", 2));
+
+		//---------------------------------------------------------
+		
+		barraHerramientas.add(negritaBarra);
+		barraHerramientas.add(cursivaBarra);
+		barraHerramientas.add(subraBarra);
+		barraHerramientas.add(azulBarra);
+		barraHerramientas.add(amarilloBarra);
+		barraHerramientas.add(rojoBarra);
+		barraHerramientas.add(derechaBarra);
+		barraHerramientas.add(centradoBarra);
+		barraHerramientas.add(izquierdaBarra);
+	
+		barraHerramientas.setOrientation(1);
+		add(barraHerramientas, BorderLayout.WEST);
+		}
 	
 	public void configura_menu(String rotulo, String menu, String tipo_letra, int estilos, int tam,String ruta_icono ) {
 		JMenuItem elem_menu= new JMenuItem(rotulo, new ImageIcon(ruta_icono));
@@ -105,8 +149,10 @@ class LaminaProcesador extends JPanel{
 		}else if(menu=="estilo") {
 			estilo.add(elem_menu);
 			if(estilos==Font.BOLD) {
+				elem_menu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
 				elem_menu.addActionListener(new StyledEditorKit.BoldAction());
 			}else if(estilos==Font.ITALIC) {
+				elem_menu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
 				elem_menu.addActionListener(new StyledEditorKit.ItalicAction());
 			}
 		}
