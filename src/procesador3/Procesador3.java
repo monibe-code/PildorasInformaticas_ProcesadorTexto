@@ -20,7 +20,7 @@ public class Procesador3 {
 
 class MarcoProcesador extends JFrame{
 	public MarcoProcesador() {
-		setBounds(500,300,550,550);
+		setBounds(500,300,550,500);
 		add(new LaminaProcesador());
 		setVisible(true);
 	}
@@ -92,45 +92,29 @@ class LaminaProcesador extends JPanel{
 		//ahora debemos especificar dónde va a hacer efecto (en el JTextPane)
 		miarea.setComponentPopupMenu(emergente);
 		//--------------------------------------------------------
-		//Creación barra herramientas a la izquierda
-		JToolBar barraHerramientas= new JToolBar();
-		JButton negritaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/negrita.gif"));
-		JButton cursivaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/cursiva.gif"));
-		JButton subraBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/subrayado.gif"));
-		JButton azulBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaAzul.gif"));
-		JButton amarilloBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaAmarilla.gif"));
-		JButton rojoBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/bolaRoja.gif"));
-		JButton derechaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/derecha.gif"));
-		JButton centradoBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/centrado.gif"));
-		JButton izquierdaBarra= new JButton(new ImageIcon("src/Procesador3/imagenes/izquierda.gif"));
+		//construcción de los botones con el método configurabarra
+		barraHerramientas=new JToolBar();
+		configuraBarra("src/Procesador3/imagenes/negrita.gif").addActionListener(new StyledEditorKit.BoldAction());
+		configuraBarra("src/Procesador3/imagenes/cursiva.gif").addActionListener(new StyledEditorKit.ItalicAction());
+		configuraBarra("src/Procesador3/imagenes/subrayado.gif").addActionListener(new StyledEditorKit.UnderlineAction());
+		barraHerramientas.addSeparator();
+		configuraBarra("src/Procesador3/imagenes/bolaazul.gif").addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.BLUE));
+		configuraBarra("src/Procesador3/imagenes/bolaamarilla.gif").addActionListener(new StyledEditorKit.ForegroundAction("Amarillo", Color.YELLOW));
+		configuraBarra("src/Procesador3/imagenes/bolaroja.gif").addActionListener(new StyledEditorKit.ForegroundAction("Rojo", Color.RED));
+		barraHerramientas.addSeparator();
+		configuraBarra("src/Procesador3/imagenes/derecha.gif").addActionListener(new StyledEditorKit.AlignmentAction("Derecha", 0));
+		configuraBarra("src/Procesador3/imagenes/centrado.gif").addActionListener(new StyledEditorKit.AlignmentAction("Centrado", 1));
+		configuraBarra("src/Procesador3/imagenes/izquierda.gif").addActionListener(new StyledEditorKit.AlignmentAction("Izquierda", 2));
 
-		
-		//---------------------------------------------------------
-		negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
-		cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
-		subraBarra.addActionListener(new StyledEditorKit.UnderlineAction());
-		azulBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.BLUE));
-		amarilloBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.YELLOW));
-		rojoBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.RED));
-		derechaBarra.addActionListener(new StyledEditorKit.AlignmentAction("Derecha", 0));
-		centradoBarra.addActionListener(new StyledEditorKit.AlignmentAction("Centrado",1));
-		izquierdaBarra.addActionListener(new StyledEditorKit.AlignmentAction("Izquierda", 2));
-
-		//---------------------------------------------------------
-		
-		barraHerramientas.add(negritaBarra);
-		barraHerramientas.add(cursivaBarra);
-		barraHerramientas.add(subraBarra);
-		barraHerramientas.add(azulBarra);
-		barraHerramientas.add(amarilloBarra);
-		barraHerramientas.add(rojoBarra);
-		barraHerramientas.add(derechaBarra);
-		barraHerramientas.add(centradoBarra);
-		barraHerramientas.add(izquierdaBarra);
-	
 		barraHerramientas.setOrientation(1);
 		add(barraHerramientas, BorderLayout.WEST);
 		}
+	
+	public JButton configuraBarra(String ruta) {
+		JButton boton = new JButton(new ImageIcon(ruta));
+		barraHerramientas.add(boton);
+		return boton;
+	}
 	
 	public void configura_menu(String rotulo, String menu, String tipo_letra, int estilos, int tam,String ruta_icono ) {
 		JMenuItem elem_menu= new JMenuItem(rotulo, new ImageIcon(ruta_icono));
@@ -162,5 +146,8 @@ class LaminaProcesador extends JPanel{
 	
 	private JTextPane miarea;
 	private JMenu fuente, estilo, tamagno;
+	private JToolBar barraHerramientas;
+	private JButton negritaBarra, cursivaBarra, subraBarra, rojoBarra, amarilloBarra,azulBarra, izquierdaBarra, derechaBarra, centradoBarra;
+	
 }
 
